@@ -1,0 +1,95 @@
+heat_template_version: 2015-10-15
+
+parameters:
+  flavor:
+    type: string
+    description: Flavor to use for servers
+    default: m1.tiny
+  image:
+    type: string
+    description: Image name or ID
+    default: cirros  
+  key_name:
+    type: string
+    description: Keypair to inject into newly created servers
+    default: heat_key
+  public_network:
+    type: string
+    description: public network ID.
+    default: ee59c585-e447-4330-801e-398d487815c5
+
+resources:
+  mybucket:
+    type: "OS::Nova::Server"
+    properties:
+      name: mybucket
+      image: { get_param: image }
+      flavor: { get_param: flavor }
+      key_name: { get_param: key_name }
+      networks:
+        - port: { get_resource: mybucket_management_port }
+
+
+  mybucket_management_port:
+    type: "OS::Neutron::Port"
+    properties:
+      network_id: { get_resource: mynet }
+      security_groups:
+        - { get_resource: mysecurity_group }
+
+  myfloating_ip:
+    type: "OS::Neutron::FloatingIP"
+    properties:
+      floating_network_id: { get_param: public_network }
+      port_id: { get_resource: mybucket_management_port }
+
+  mynet:
+    type: "OS::Neutron::Net"
+    properties:
+      name: management-net
+
+  mysub_net:
+    type: "OS::Neutron::Subnet"
+    properties:
+      name: management-sub-net
+      network_id: { get_resource: mynet }
+      cidr: 192.168.25.0/24
+      gateway_ip: 192.168.25.1
+      enable_dhcp: true
+      allocation_pools: 
+        - start: "192.168.25.2"
+          end: "192.168.25.50"
+
+  mysecurity_group:
+    type: OS::Neutron::SecurityGroup
+    properties:
+      description: Neutron security group rules
+      name: mysecurity_group
+      rules:
+      - remote_ip_prefix: 0.0.0.0/0
+        protocol: tcp
+        port_range_min: 22
+        port_range_max: 22
+      - remote_ip_prefix: 0.0.0.0/0
+        protocol: icmp
+        direction: ingress
+
+  router:
+    type: OS::Neutron::Router
+
+  router_gateway:
+    type: OS::Neutron::RouterGateway
+    properties:
+      router_id: { get_resource: router }
+      network_id: { get_param: public_network }
+
+  router_interface:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: router }
+      subnet_id: { get_resource: mysub_net }
+
+outputs:
+  public_ip:
+    description: Floating IP address in public network
+    value: { get_attr: [ myfloating_ip, floating_ip_address ] }
