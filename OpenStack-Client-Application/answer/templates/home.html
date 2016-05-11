@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{# {% block bodytitle %}<h1 class="page-header">Dashboard</h1>{% endblock %} #}
+{% block body %}
+<h2 class="sub-header">Instances</h2>
+    <div class="table2-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Instance Name</th>
+          <th>Status</th>
+          <th>Attached</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for server in ins_list %}
+        <tr>
+          <td>{{ server.name }}</td>
+          <td>{{ server.status}}</td>
+          <td>{{ server['os-extended-volumes:volumes_attached']}}</td>
+          <td>
+              <!-- Split button -->
+                <div class="btn-group">
+                  <a class="btn btn-default snapshot-modal" href="#" data-toggle="modal" data-target="#myModal" data-id="{{ server.id }}">Create Snapshot</a>
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a href="/">Delete</a></li>
+                    {% if server.status=='ACTIVE' %}
+                    <li><a href="/">Shutdown</a></li>
+                    <li><a href="/">Suspend</a></li>
+                    {% endif %}
+                    {% if server.status=='SUSPENDED' %}
+                        <li><a href="/">Resume</a></li>
+                    {% endif %}
+                    {% if server.status=='SHUTOFF' %}
+                        <li><a href="/">Start</a></li>
+                    {% endif %}
+                  </ul>
+                </div>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+
+   <!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <form METHOD="GET" action="/">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Create Snapshot</h4>
+      </div>
+      <div class="modal-body">
+          <input type="hidden" name="id" id="instance_id">
+          <div class="form-group">
+            <label>Snapshot Name*</label>
+            <input type="text" class="form-control" placeholder="Name" name="name">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Create Snapshot</button>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extrajs %}
+ <script type="text/javascript">
+    $(document).on("click", ".snapshot-modal", function(){
+        $("#instance_id").val($(this).attr("data-id"));
+    });
+    </script>
+{% endblock %}
