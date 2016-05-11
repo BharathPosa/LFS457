@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{# {% block bodytitle %}<h1 class="page-header">Dashboard</h1>{% endblock %} #}
+{% block body %}
+<h2 class="sub-header">Volumes <a class="btn pull-right btn-warning" href="/vol_create">Create volume</a> </h2>
+    <div class="table-resp2onsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Volume Name</th>
+          <th>Status</th>
+          <th>Instance ID</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for volume in vol_list %}
+        <tr>
+          <td>{{ volume.name }}</td>
+          <td>{{ volume.status}}</td>
+          <td>{% for v in volume.attachments %}
+              {{ v.server_id }}
+              <div id="{{ volume.id }}" class="hide" style="display: none">
+                <div>{{ v.server_id }}</div><div><a href="/volumes" class="btn btn-danger">Detach Voume</a> </div>
+              </div>
+              {% endfor %}
+          </td>
+          <td>
+                <!-- Split button -->
+                <div class="btn-group">
+                  <a class="btn btn-default snapshot-modal" href="#" data-toggle="modal" data-target="#myModal" data-id="{{ volume.id }}">Manage Attachments</a>
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a href="/volumes">Delete</a></li>
+                  </ul>
+                </div>
+
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+
+ <!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <form METHOD="GET" action="/volumes">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Manage Attachments</h4>
+      </div>
+      <div class="modal-body">
+          <input type="hidden" name="id" id="volume_id">
+          <div id ="body-content">
+          <div class="form-group">
+            <label>Instance Name*</label>
+              <select name="instance" class="form-control">
+                  {% for ins in ins_list %}
+                  <option value="{{ ins.id }}">{{ ins.name }}</option>
+                  {% endfor %}
+              </select>
+        </div>
+              </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success" id="cancel">Attach Volume</button>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+{% block extrajs %}
+ <script type="text/javascript">
+ var html = $("#body-content").html();
+    $(document).on("click", ".snapshot-modal", function(){
+        vol_id = $(this).attr("data-id");
+        $("#volume_id").val(vol_id);
+        if($("#"+vol_id).length >0){
+            $("#body-content").html($("#"+vol_id).html())
+            $("#cancel").hide();
+        }else{
+            $("#body-content").html(html);
+            $("#cancel").show();
+        }
+    });
+    </script>
+{% endblock %}
