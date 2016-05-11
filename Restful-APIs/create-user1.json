@@ -1,0 +1,11 @@
+{
+    "user": {
+        "default_project_id": "default",
+        "description": "user1",
+        "domain_id": "default",
+        "email": "user1@lf.com",
+        "enabled": true,
+        "name": "user1",
+        "password": "secret"
+    }
+}

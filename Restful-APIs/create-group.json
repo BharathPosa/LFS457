@@ -1,0 +1,7 @@
+{
+    "group": {
+        "description": "simple test group",
+        "domain_id": "default",
+        "name": "test_group"
+    }
+}
