@@ -1,0 +1,50 @@
+
+heat_template_version: 2015-10-15
+
+description: Horizontal Scaling with resource groups.
+parameters:
+  image:
+    type: string
+    label: image name or ID
+    description: Image to be used for compute instance
+    default: cirros
+  flavor:
+    type: string
+    label: Flavor
+    description: Type of instance (flavor) to be used
+    default: m1.tiny
+  key:
+    type: string
+    label: Key name
+    description: Name of key-pair to be used for compute instance
+    default: heat_key
+  network:
+    type: string
+    label: Private network name or ID/public network name or ID.
+    description: Network to attach instance to.
+    default: private
+  cluster_size:
+      type: number
+      label: cluster size
+      description: Number of instances in cluster
+resources:
+  my_instance:
+    type: OS::Heat::ResourceGroup
+    properties:
+      count: { get_param: cluster_size}
+
+      resource_def:
+        type: OS::Nova::Server
+        properties:
+          image: { get_param: image }
+          flavor: { get_param: flavor }
+          key_name: { get_param: key }
+          networks:
+            - network: { get_param: network }
+
+
+outputs:
+  instance_ip:
+    description: IP address of the instance
+    value: { get_attr: [my_instance, first_address] }
+
