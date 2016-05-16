@@ -27,7 +27,7 @@
         $ sudo truncate -s0 /etc/keystone/policy.json
 3. Copy all the text from _v3cloudsample.json_ and paste in _/etc/keystone/policy.json_ file
 
-        $ sudo cat v3cloudsample.json > /etc/keystone/policy.json
+        $ sudo bash -c 'cat v3cloudsample.json > /etc/keystone/policy.json'
 4. Open file _/etc/keystone/policy.json_ and on line no 3, replace `admin_domain_id` string with `linux` domain ID.
 
         "cloud_admin": "role:admin and (token.is_admin_project:True or domain_id:<linux-domain-id>)"
@@ -42,8 +42,33 @@ Create a project `avengers` in domain `marvel` using
 
 1. Get the token using `hulk` credentials
     1. Create a file [_domain-scoped.json_](domain-scoped.json) and write the user credentials
+    
+              $ vi domain-scoped.json
+              {
+                  "auth": {
+                      "identity": {
+                          "methods": [
+                              "password"
+                          ],
+                          "password": {
+                              "user": {
+                                  "domain": {
+                                      "name": "marvel"
+                                  },
+                                  "name": "hulk",
+                                  "password": "greenhulk"
+                              }
+                          }
+                      },
+                      "scope": {
+                          "domain": {
+                              "name": "marvel"
+                          }
+                      }
+                  }
+              }
 
-      > Hint: Take the reference from _domain-scoped.json_ and
+      > Hint: Take the reference from [_domain-scoped.json_](domain-scoped.json) and
       configure json file properly: domain - marvel, username - hulk  and password - greenhulk
 
     2. Get the token using above credntials file
@@ -52,9 +77,20 @@ Create a project `avengers` in domain `marvel` using
               http://127.0.0.1:35357/v3/auth/tokens | grep ^X-Subject-Token: | awk '{print $2}' )
               $ echo $TOKEN
 2. Create a project `avengers` using the above generated token
-    1. Write the project configuration into a file [_create-project.json_](create-project.json)
+    1. Write the project configuration into a file _create-project.json_
     
-      > Hint: Take the reference from _create-project.json_ and
+              $ vi create-project.json
+              {
+                  "project": {
+                      "description": "Description",
+                      "domain_id": "<domain ID>",
+                      "enabled": true,
+                      "is_domain": false,
+                      "name": "<proj-name>"
+                  }
+              }
+    
+      > Hint: Take the reference from [_create-project.json_](create-project.json) and
       configure json file properly: domain_id - <marvel-domain-id>, name - avengers, description - 'Marvel Avengers'
       
     2. Create project using above [_create-project.json_](create-project.json) file
@@ -73,7 +109,7 @@ domain id of `dc`.
       configure json file properly: domain_id - <dc-domain-id>, name - faultyProject, description - 'Faulty Project'
     2. Request to create project using above file.
     
-              $ curl -s -d @create-project.json -H"X-Auth-Token:$TOKEN" -H "Content-type: application/json"
+              $ curl -s -d @create-project.json -H"X-Auth-Token:$TOKEN" -H "Content-type: application/json" \
               http://127.0.0.1:35357/v3/projects | jq "."
 
 
@@ -96,7 +132,7 @@ It will success becuse `ubuntu` has cloud_admin role
     
     2. Request the Keystone to create a project `legends` using above json file
 
-              $ curl -s -d @create-project.json -H"X-Auth-Token:$TOKEN" -H "Content-type: application/json"
+              $ curl -s -d @create-project.json -H"X-Auth-Token:$TOKEN" -H "Content-type: application/json" \
               http://127.0.0.1:35357/v3/projects | jq "."
 
 
@@ -104,4 +140,4 @@ It will success becuse `ubuntu` has cloud_admin role
 
 #### Revert back the policy file:
              $ sudo cp /etc/keystone/policy.json.bkp /etc/keystone/policy.json
- 
+

@@ -4,7 +4,7 @@
 1. Open the Keystone configuration file
 
         $ sudo vi /etc/keystone/keystone.conf
-2. Under section `[identity]`, uncomment the below lines
+2. Under section `[identity]`, update the below lines
 
         domain_specific_drivers_enabled = true
         domain_config_dir = /etc/keystone/domains
@@ -26,7 +26,18 @@
             $ sudo vi /etc/keystone/domains/keystone.enterprise_cloud.conf
     
     2. Write the LDAP server configuration to [_keystone.enterprise_cloud.conf_](keystone.enterprise_cloud.conf)
-        > Hint: Use the file _keystone.enterprise_cloud.conf_ for ldap configuration reference and edit the
+
+            [ldap]
+            url = ldap://<ldap-server-ip>
+            user = cn=admin,dc=linuxfoundation,dc=org
+            password = lf@123
+            suffix = dc=linuxfoundation,dc=org
+            user_tree_dn = ou=Users,dc=linuxfoundation,dc=org
+            
+            [identity]
+            driver = keystone.identity.backends.ldap.Identity
+
+        > Note: Use the file [_keystone.enterprise_cloud.conf_](keystone.enterprise_cloud.conf) for ldap configuration reference and edit the
         appropriate fields like `url`
     3. Save and exit the file
 
@@ -36,12 +47,24 @@
 
 #### Task-3: Verify user login from Horizon
 
+1. Export the Openstack environment variables to access Openstack APIs through OpenStack CLI
+
+        $ source ~/openrc
+        
+
 1. List the available users in domain `enterprise_cloud`
 
-        $ openstack user --domain=enterprise_cloud list
+        $ openstack user list --domain=enterprise_cloud
       
-2. Now you can see a user `gopal` in user list
-3. Browse the dashboard and access the horizon using below credentials:
+2. Now you can see a user `gopal` in users list
+3. Create a project `bigdata`
+
+        $ openstack project create --domain=enterprise_cloud bigdata
+4. Assign `admin` role to `gopal` on project `bigdata`
+
+        $ openstack role add --user=gopal --project=bigdata --user-domain=enterprise_cloud admin
+        
+5. Browse the dashboard and access the horizon using below credentials:
 
   * Domain: enterprise_cloud
   * User Name: gopal

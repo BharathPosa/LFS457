@@ -1,9 +1,9 @@
 {
     "project": {
         "description": "Description",
-        "domain_id": "<domin ID>",
+        "domain_id": "<domain id>",
         "enabled": true,
         "is_domain": false,
-        "name": "<name>"
+        "name": "<project name>"
     }
 }
