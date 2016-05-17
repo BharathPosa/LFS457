@@ -56,16 +56,16 @@
 
         $ openstack user list --domain=enterprise_cloud
       
-2. Now you can see a user `gopal` in users list
+2. Now you can see a user `lfs457_ec` in users list
 3. Create a project `bigdata`
 
         $ openstack project create --domain=enterprise_cloud bigdata
-4. Assign `admin` role to `gopal` on project `bigdata`
+4. Assign `admin` role to `lfs457_ec` on project `bigdata`
 
-        $ openstack role add --user=gopal --project=bigdata --user-domain=enterprise_cloud admin
+        $ openstack role add --user=lfs457_ec --project=bigdata --user-domain=enterprise_cloud admin
         
 5. Browse the dashboard and access the horizon using below credentials:
 
   * Domain: enterprise_cloud
-  * User Name: gopal
+  * User Name: lfs457_ec
   * Password: welcome123
