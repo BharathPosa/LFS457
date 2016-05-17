@@ -71,9 +71,9 @@ with `sql` identity backend. So Default domain uses the `sql` backend for identi
 LDAP backend for identity while default using `sql` backend.
 
 Instructor will provide you details of a LDAP server. Create a new domain `enterprise_cloud` and configure its 
-identity backend to provided LDAP configuration. List the available users and you'll see the user `gopal`.
-Create a project `bigdata` in `enterprise_cloud` and add `admin` role to `gopal` on project `bigdata`. Now login to Horizon
-using domain `enterprise_cloud`, user `gopal` and password `welcome123`
+identity backend to provided LDAP configuration. List the available users and you'll see the user `lfs457_ec`.
+Create a project `bigdata` in `enterprise_cloud` and add `admin` role to `lfs457_ec` on project `bigdata`. Now login to Horizon
+using domain `enterprise_cloud`, user `lfs457_ec` and password `welcome123`
 
 ##### Overview
 * _Task-1:_ Enable the domain specific options in the Keystone conf file
