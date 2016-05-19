@@ -1,0 +1,12 @@
+clouds:
+  devstack:
+    auth:
+      auth_url: http://127.0.0.1:35357
+      password: password
+      project_domain_id: default
+      project_name: admin
+      user_domain_id: default
+      username: admin
+    identity_api_version: '3'
+    region_name: RegionOne
+    volume_api_version: '2'
