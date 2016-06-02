@@ -13,9 +13,11 @@ Create a security group rule using admin user credentials:
 * Port number: 8080
 
 
-**Task 1**: Get the Keystone token using admin user
+**Task 1**: Get the Keystone token using admin user.
 
-**Task 2**: Send API request to create the rule in security group
+**Task 2**: Send API request to create the rule in security group.
+
+**Task 3**: Verify rule in default security group.
 
 
 **Required Setup**:
