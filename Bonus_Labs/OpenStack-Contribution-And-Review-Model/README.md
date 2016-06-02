@@ -18,7 +18,7 @@ In this exercise, we will upload a patch that depends on another patch in sandbo
 
 **Task 7**: Configure the git in $HOME/Repo2/ci-sandbox/ with patch1 as the dependency. To add dependency,
 
-Use 'git review -d <patch1 review number>'
+Use '*git review -d <patch1 review number>*'
 
 **Task 8**: Create a new branch "lf-testing-2" in $HOME/Repo2/ci-sandbox/ directory
 
@@ -26,17 +26,18 @@ Use 'git review -d <patch1 review number>'
 
 **Task 10**: Add and commit changes and upload patch2
 
+
 **Required Setup**:
 
-* item Ubuntu 14.04 LTS virtual machine
-* item Trainee should have Launchpad credentials
-* item Trainee should use his Launchpad credentials(email and password) to configure Gerrit Code review system with following:
-  * item Gerrit username
-  * item ICLA
-  * item OpenStack Foundation Membership for preferred email address
-  * item Contact information
-* item Git should be installed
-  * item sudo apt-get install git
+* Ubuntu 14.04 LTS virtual machine
+* Trainee should have Launchpad credentials
+* Trainee should use his Launchpad credentials(email and password) to configure Gerrit Code review system with following:
+  * Gerrit username
+  * ICLA
+  * OpenStack Foundation Membership for preferred email address
+  * Contact information
+* Git should be installed
+  * sudo apt-get install git
 
 
 
@@ -59,9 +60,11 @@ Blueprint https://blueprints.launchpad.net/cinder/+spec/gcs-cinder-backup-driver
 
 **Task 6**: Go through one patch and read the comments which are added by users
 
+
 **Required Setup**:
 
 Browser with internet connectivity
+
 
 
 ###Exercise 19.6 Elaboration of Blueprint named "python-neutronclient for cisco Dynamic Fabric###
@@ -85,6 +88,7 @@ python-neutronclient-for-cisco-dfa in the browser and do the following tasks.
 **Task 5**: How many patches are uploaded in the Blueprint?
 
 **Task 6**: Go through one patch and read the comments which are added by users
+
 
 **Required Setup**:
 

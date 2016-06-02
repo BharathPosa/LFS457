@@ -4,13 +4,13 @@
 
 Create a security group rule using admin user credentials:
 
-* item Security group: default
+* Security group: default
 
-* item Protocol: TCP
+* Protocol: TCP
 
-* item Direction: Ingress
+* Direction: Ingress
 
-* item Port number: 8080
+* Port number: 8080
 
 
 **Task 1**: Get the Keystone token using admin user

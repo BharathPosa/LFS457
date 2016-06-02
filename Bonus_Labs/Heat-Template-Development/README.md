@@ -20,6 +20,7 @@ This exercise will help to develop a basic template to deploy a single compute i
 
 **Task 6**: Open Horizon to observe the created neutron network and Cinder volume attachment to a Nova instance
 
+
 **Required Setup**:
 
 OpenStack Environment with Deployed Heat Service.

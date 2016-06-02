@@ -13,6 +13,7 @@ This task will help to understand how to enable firewall service in devstack env
 
 **Task 4**: Verify the firewall service by applying some rules.
 
+
 **Required setup:**
 
 Single node Devstack environment
