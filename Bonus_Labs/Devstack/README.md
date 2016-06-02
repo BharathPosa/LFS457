@@ -19,7 +19,7 @@ This task will help to understand how to enable firewall service in devstack env
 Single node Devstack environment
 
 
-###Exercise 2: Configure devstack with application catalog service and add glance image.###
+###Exercise 18.5: Configure devstack with application catalog service and add glance image.###
 
 ####Overview####
 Enable below configurations in localrc and deploy devstack environment.
