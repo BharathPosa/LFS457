@@ -67,8 +67,7 @@ Browser with internet connectivity
 
 
 
-###Exercise 19.6 Elaboration of Blueprint named "python-neutronclient for cisco Dynamic Fabric###
-###Automation Support"###
+###Exercise 19.6 Elaboration of Blueprint named "python-neutronclient for cisco Dynamic Fabric Automation Support"###
 
 ####Overview:####
 
