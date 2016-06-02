@@ -72,8 +72,7 @@ Browser with internet connectivity
 ####Overview:####
 
 This exercise helps you to know about Launchpad Blueprint 'python-neutronclient for cisco Dynamic Fabric
-Automation Support'. Open the Blueprint https://blueprints.launchpad.net/python-neutronclient/+spec/
-python-neutronclient-for-cisco-dfa in the browser and do the following tasks.
+Automation Support'. Open the Blueprint https://blueprints.launchpad.net/python-neutronclient/+spec/python-neutronclient-for-cisco-dfa in the browser and do the following tasks.
 
 **Task 1**: Who registered the Blueprint and when?
 
