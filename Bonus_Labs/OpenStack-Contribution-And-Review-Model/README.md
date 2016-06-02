@@ -18,7 +18,7 @@ In this exercise, we will upload a patch that depends on another patch in sandbo
 
 **Task 7**: Configure the git in $HOME/Repo2/ci-sandbox/ with patch1 as the dependency. To add dependency,
 
-Use '*git review -d <patch1 review number>*'
+Use '*git review -d \<patch1 review number\>*'
 
 **Task 8**: Create a new branch "lf-testing-2" in $HOME/Repo2/ci-sandbox/ directory
 
@@ -68,7 +68,6 @@ Browser with internet connectivity
 
 
 ###Exercise 19.6 Elaboration of Blueprint named "python-neutronclient for cisco Dynamic Fabric###
-
 ###Automation Support"###
 
 ####Overview:####
