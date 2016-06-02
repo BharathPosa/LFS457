@@ -24,7 +24,7 @@ Use '*git review -d \<patch1 review number\>*'
 
 **Task 9**: Create a new file "lf-test2.txt" in branch "lf-testing-2" and add some contents in file
 
-**Task 10**: Add and commit changes and upload patch2
+**Task 10**: Add and commit changes and upload patch2, use "--amend" to commit.
 
 
 **Required Setup**:
