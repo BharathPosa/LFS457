@@ -5,7 +5,7 @@
 This exercise troubleshoots a ping/ssh issue to Nova instance from Host.
 In this exercise, initially populate the environment variables; 'OS_USERNAME' with 'admin', 'OS_PROJECT_NAME' with 'admin' and 'OS_PASSWORD' with 'password'.
 
-Then create a instance 'vm2' with the image 'cirros' and associate the network 'private2' by running the following commands:
+Then create an instance 'vm2' with the image 'cirros' and associate the network 'private2' by running the following commands:
 
 *$ glance image-list*
 
