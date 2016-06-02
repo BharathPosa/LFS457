@@ -1,6 +1,6 @@
 ###Exercise 11.4 Develop a Heat template including the following features###
 
-###(i) Neutron networking###
+###(i) Neutron Networking###
 
 ###(ii) Attach Cinder volume to a Nova instance.###
 
@@ -23,5 +23,5 @@ This exercise will help to develop a basic template to deploy a single compute i
 
 **Required Setup**:
 
-OpenStack Environment with Deployed Heat Service.
+OpenStack environment with deployed Heat Service.
 
