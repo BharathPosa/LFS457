@@ -1,6 +1,6 @@
-#**Exercise 4.4** Create a new role 'test_role' and access APIs with that role#
+###Exercise 4.4 Create a new role 'test_role' and access APIs with that role###
 
-##**Overview**##
+####Overview####
 In this exercise you are going to create a new role and access the API 'domain list' with that role.
 Create a new role 'test_role'. Create an user 'test_user' in 'default' domain with password 'password'. Assign 'test_role' to the user 'test_user' on domain 'default'.
 
