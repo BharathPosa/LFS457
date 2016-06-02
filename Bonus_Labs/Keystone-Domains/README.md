@@ -1,8 +1,8 @@
 ###Exercise 4.4 Create a new role 'demo_role' and access APIs with that role###
 
 ####Overview####
-In this exercise you are going to create a new role and access the API 'domain list' with that role.
-Create a new role 'demo_role'. Create an user 'demo_user' in 'default' domain with password 'password'. Assign 'demo_role' to the user 'demo_user' on domain 'default'.
+In this exercise, you are going to create a new role and access the API 'domain list' with that role.
+Create a new role 'demo_role'. Create a user 'demo_user' in 'default' domain with password 'password'. Assign 'demo_role' to the user 'demo_user' on domain 'default'.
 
 Edit the policy file to access domain list by role 'demo_role'. And check the user 'demo_user' is able to get the domain list.
 
